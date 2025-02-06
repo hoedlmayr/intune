@@ -1,0 +1,32 @@
+name: Publish Autopilot Branding
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Create Intune app
+      shell: cmd
+      run: |
+        MakeApp.cmd
+        mkdir Build
+        copy AutopilotBranding.intunewin Build
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: AutopilotBranding
+        path: AutopilotBranding.intunewin

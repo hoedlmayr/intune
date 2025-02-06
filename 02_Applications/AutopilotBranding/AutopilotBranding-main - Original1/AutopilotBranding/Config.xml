@@ -1,0 +1,63 @@
+<Config>
+  <TimeZone></TimeZone>
+  <RemoveApps>
+    <App>DellInc.DellDigitalDelivery</App>
+    <App>DellInc.DellOptimizer</App>
+    <App>DellInc.DellSupportAssistforPCs</App>
+    <App>Microsoft.BingNews</App>
+    <App>Microsoft.BingWeather</App>
+    <App>Microsoft.BingSearch</App>
+    <App>Microsoft.GamingApp</App>
+    <App>Microsoft.Getstarted</App>
+    <App>Microsoft.GetHelp</App>
+    <App>microsoft.windowscommunicationsapps</App>
+    <App>Microsoft.Xbox.TCUI</App>
+    <App>Microsoft.XboxGamingOverlay</App>
+    <App>Microsoft.XboxIdentityProvider</App>
+    <App>Microsoft.XboxSpeechToTextOverlay</App>
+    <App>Microsoft.MicrosoftSolitaireCollection</App>
+    <App>Microsoft.SkypeApp</App>
+  </RemoveApps>
+  <OneDriveSetup>https://go.microsoft.com/fwlink/?linkid=844652</OneDriveSetup>
+  <AddFeatures>
+    <Feature>Microsoft.Windows.Sense.Client~~~~</Feature>
+    <!-- If you do add a language pack, make sure you add these language add-ons for each one.
+    <Feature>Language.Basic~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.Fonts.PanEuropeanSupplementalFonts~~~~0.0.1.0</Feature>
+    <Feature>Language.Handwriting~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.OCR~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.Speech~~~es-ES~0.0.1.0</Feature>
+    <Feature>Language.TextToSpeech~~~es-ES~0.0.1.0</Feature>
+    -->
+    <!-- If you want .NET 3.5, uncomment this one.
+    <Feature>NetFX3~~~~</Feature>
+    -->
+    <Feature>WMIC</Feature>
+    <Feature>NetFX3~~~~</Feature>
+  </AddFeatures>
+  <!-- This section defines a list of Optional Features to disable. Add the Name of the feature as returned by Get-WindowsOptionalFeature -->
+  <DisableOptionalFeatures>
+    <Feature>MicrosoftWindowsPowershellV2Root</Feature>
+    <Feature>WorkFolders-Client</Feature>
+    <Feature>Recall</Feature>
+    <Feature>MediaPlayback</Feature>
+  </DisableOptionalFeatures>
+  <!-- This section defines a list of Windows Capabilities to remove. Provide the name of the Capability to have it removed as returned by Get-WindowsCapability, excluding the tildes and version.  -->
+  <RemoveCapability>
+    <Capability>App.StepsRecorder</Capability>
+    <Capability>Microsoft.Windows.PowerShell.ISE</Capability>
+  </RemoveCapability>
+  <Language></Language>
+  <!-- If you want to set a language, customize and reference this file: <Language>Language.xml</Language> -->
+  <DefaultApps>Associations.xml</DefaultApps>
+  <RegisteredOwner>IT Hoedlmayr</RegisteredOwner>
+  <RegisteredOrganization>Hoedlmayr International</RegisteredOrganization>
+  <OEMInfo>
+    <Manufacturer>Contoso</Manufacturer>
+    <Model>PC</Model>
+    <Logo>Contoso.bmp</Logo>
+    <SupportPhone>+43726266011988</SupportPhone>
+    <SupportHours>8am-4pm PST</SupportHours>
+    <SupportURL>http://www.contoso.com</SupportURL>
+  </OEMInfo>
+</Config>

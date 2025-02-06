@@ -1,0 +1,23 @@
+# Logs
+*.log
+01_PackagingTools
+
+# Ignore other unnecessary files
+*.tmp
+*.bak
+*.swp
+*.exe
+*.png
+*.intunewin
+*.msi
+*.cab
+*.zip
+*.rar
+*.mst 
+*.msp
+*.bmp
+*.jpg
+*.jpeg
+*.gif
+*.tif
+*.tiff

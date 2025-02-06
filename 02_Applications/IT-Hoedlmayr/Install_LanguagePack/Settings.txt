@@ -1,0 +1,9 @@
+SetLanguagebasedonHomeLocation.ps1
+Runs a Powershell Script which sets and installs a language pack automatically based on which region the user has selected during OOBE phase
+
+IT-Hoedlmayr
+1.0
+
+
+powershell.exe -noprofile -executionpolicy bypass -file .\SetLanguagebasedonHomeLocation.ps1
+none

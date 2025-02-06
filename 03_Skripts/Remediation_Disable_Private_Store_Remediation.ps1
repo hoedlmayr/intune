@@ -1,0 +1,2 @@
+'HKLM:\Software\Policies\Microsoft\WindowsStore' | % { if (Test-Path $_) { Get-Item $_ } else { New-Item $_ } }
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\WindowsStore"  -Name 'RequirePrivateStoreOnly' -Value "00000001" -Type Dword

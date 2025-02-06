@@ -1,0 +1,31 @@
+<ApplicationInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ToolVersion="1.8.6.0">
+  <Name>Barracuda Network Access Client 5.3.5</Name>
+  <UnencryptedContentSize>35594600</UnencryptedContentSize>
+  <FileName>IntunePackage.intunewin</FileName>
+  <SetupFile>BarracudaNAC.msi</SetupFile>
+  <EncryptionInfo>
+    <EncryptionKey>rJ2ROxCaNOzW9uSDgNI4mg7EHU6eGt2kpeOv20DYxOQ=</EncryptionKey>
+    <MacKey>E9747ijFR/SCYJFRjAWFVMKTlCdMLC1bnmHmFt7KruQ=</MacKey>
+    <InitializationVector>GX2gDhbLn+1DL/IXnI4QAw==</InitializationVector>
+    <Mac>IZoOsyEuLRRPS9XHJzCSL/I7Z9w++LhN06mprbfEMfU=</Mac>
+    <ProfileIdentifier>ProfileVersion1</ProfileIdentifier>
+    <FileDigest>FPIdJ3NAmjfXoN3kmx+y79oxDMjH7KMnvEo4lHUAIlQ=</FileDigest>
+    <FileDigestAlgorithm>SHA256</FileDigestAlgorithm>
+  </EncryptionInfo>
+  <MsiInfo>
+    <MsiProductCode>{C222B45D-E81A-41E0-932D-6A6CFB21E817}</MsiProductCode>
+    <MsiProductVersion>9.03.5016</MsiProductVersion>
+    <MsiPackageCode>{3F42E40F-10F6-4EB4-9E02-3A1ABC2227BB}</MsiPackageCode>
+    <MsiUpgradeCode>{4938CF71-BCA0-4010-BEA3-E5921B19B019}</MsiUpgradeCode>
+    <MsiExecutionContext>System</MsiExecutionContext>
+    <MsiRequiresLogon>false</MsiRequiresLogon>
+    <MsiRequiresReboot>false</MsiRequiresReboot>
+    <MsiIsMachineInstall>true</MsiIsMachineInstall>
+    <MsiIsUserInstall>false</MsiIsUserInstall>
+    <MsiIncludesServices>false</MsiIncludesServices>
+    <MsiIncludesODBCDataSource>false</MsiIncludesODBCDataSource>
+    <MsiContainsSystemRegistryKeys>true</MsiContainsSystemRegistryKeys>
+    <MsiContainsSystemFolders>true</MsiContainsSystemFolders>
+    <MsiPublisher>Barracuda Networks, Inc.</MsiPublisher>
+  </MsiInfo>
+</ApplicationInfo>

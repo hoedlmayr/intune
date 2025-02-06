@@ -32,13 +32,21 @@ Write-Log "-------------------------------------"
 Write-Log "-------------------------------------"
 Write-Log "Spracheinstellungen starten..."
 
-# Prüfen, ob das Modul installiert ist
+# Prüfen, ob das Modul installiert ist und ggf. installieren
 $moduleName = "LanguagePackManagement"
 $module = Get-Module -ListAvailable -Name $moduleName
 if ($module) {
     $moduleStatus = "INSTALLIERT"
 } else {
     $moduleStatus = "NICHT INSTALLIERT"
+    try {
+        Write-Log "Das Modul 'LanguagePackManagement' ist nicht installiert. Installation wird gestartet..."
+        Install-Module -Name $moduleName -Force -Scope CurrentUser
+        Write-Log "Das Modul 'LanguagePackManagement' wurde erfolgreich installiert."
+    } catch {
+        Write-Log "Fehler bei der Installation des Moduls 'LanguagePackManagement': $_"
+        throw
+    }
 }
 Write-Log "Das benoetigte Powershell Modul 'LanguagePackManagement' ist ${ModuleStatus}"
 

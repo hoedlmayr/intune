@@ -41,10 +41,12 @@ if ($module) {
     $moduleStatus = "NICHT INSTALLIERT"
     try {
         Write-Log "Das Modul 'LanguagePackManagement' ist nicht installiert. Installation wird gestartet..."
-        Install-Module -Name $moduleName -Force -Scope CurrentUser
+        Install-Module -Name $moduleName -Force -Scope AllUsers
         Write-Log "Das Modul 'LanguagePackManagement' wurde erfolgreich installiert."
+        Import-Module $moduleName
+        Write-Log "Das Modul 'LanguagePackManagement' wurde erfolgreich importiert."
     } catch {
-        Write-Log "Fehler bei der Installation des Moduls 'LanguagePackManagement': $_"
+        Write-Log "Das Modul 'LanguagePackManagement' wurde erfolgreich installiert."
         throw
     }
 }

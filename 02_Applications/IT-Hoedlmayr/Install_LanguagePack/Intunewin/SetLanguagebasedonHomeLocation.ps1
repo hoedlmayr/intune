@@ -10,6 +10,7 @@ Function Write-Log {
     $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     "$TimeStamp - $Message" | Out-File -FilePath $LogFile -Append
 }
+
 # Start der Transcript-Protokollierung
 try {
     Write-Log "Start-Transcript wird gestartet..."
@@ -18,13 +19,45 @@ try {
 } catch {
     Write-Log "Fehler beim Starten von Start-Transcript: $_"
 }
+
+# PowerShell-Version abrufen
+$PSVersion = $PSVersionTable.PSVersion
+$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+
 # Log-Start
+Write-Log "-------------------------------------"
+Write-Log "-------------------------------------"
+Write-Log "$timestamp PowerShell Version: ${PSVersion}"
+Write-Log "-------------------------------------"
 Write-Log "-------------------------------------"
 Write-Log "Spracheinstellungen starten..."
 
+# Prüfen, ob das Modul installiert ist und ggf. installieren
+$moduleName = "LanguagePackManagement"
+$module = Get-Module -ListAvailable -Name $moduleName
+if ($module) {
+    $moduleStatus = "INSTALLIERT"
+} else {
+    $moduleStatus = "NICHT INSTALLIERT"
+    try {
+        Write-Log "Das Modul 'LanguagePackManagement' ist nicht installiert. Installation wird gestartet..."
+        Install-Module -Name $moduleName -Force -Scope CurrentUser
+        Write-Log "Das Modul 'LanguagePackManagement' wurde erfolgreich installiert."
+    } catch {
+        Write-Log "Fehler bei der Installation des Moduls 'LanguagePackManagement': $_"
+        throw
+    }
+}
+Write-Log "Das benoetigte Powershell Modul 'LanguagePackManagement' ist ${ModuleStatus}"
+
 # Aktuelle Region (GeoID) auslesen
-$GeoID = (Get-WinHomeLocation).GeoID
-Write-Log "Erkannte GeoID: $GeoID"
+try {
+    $GeoID = (Get-WinHomeLocation).GeoID
+    Write-Log "Erkannte GeoID: $GeoID"
+} catch {
+    Write-Log "Fehler beim Abrufen der GeoID: $_"
+    throw
+}
 
 # Mapping von GeoID zu Sprache
 $LanguageMap = @{
@@ -76,7 +109,12 @@ Function Install-Language-Pack {
 }
 
 # Sprache installieren
-Install-Language-Pack -LanguageTag $LanguageTag
+try {
+    Install-Language-Pack -LanguageTag $LanguageTag
+} catch {
+    Write-Log "Fehler bei der Installation des Sprachpakets: $_"
+    throw
+}
 
 # Spracheinstellungen setzen
 Function Set-Language-Settings {
@@ -117,7 +155,12 @@ Function Set-Language-Settings {
 }
 
 # Spracheinstellungen anwenden
-Set-Language-Settings -LanguageTag $LanguageTag
+try {
+    Set-Language-Settings -LanguageTag $LanguageTag
+} catch {
+    Write-Log "Fehler beim Anwenden der Spracheinstellungen: $_"
+    throw
+}
 
 # Log-Ende
 Write-Log "Spracheinstellungen abgeschlossen."
@@ -129,4 +172,3 @@ try {
 } catch {
     Write-Log "Fehler beim Beenden von Stop-Transcript: $_"
 }
-

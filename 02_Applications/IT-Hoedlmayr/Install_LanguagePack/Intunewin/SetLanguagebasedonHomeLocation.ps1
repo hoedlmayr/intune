@@ -32,6 +32,16 @@ Write-Log "-------------------------------------"
 Write-Log "-------------------------------------"
 Write-Log "Spracheinstellungen starten..."
 
+# Set PSGallery as a trusted repository
+try {
+    Write-Log "Setting PSGallery as a trusted repository..."
+    Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+    Write-Log "PSGallery is now a trusted repository."
+} catch {
+    Write-Log "Error setting PSGallery as a trusted repository: $_"
+    throw
+}
+
 # Prüfen, ob das Modul installiert ist und ggf. installieren
 $moduleName = "LanguagePackManagement"
 $module = Get-Module -ListAvailable -Name $moduleName
@@ -46,7 +56,7 @@ if ($module) {
         Import-Module $moduleName
         Write-Log "Das Modul 'LanguagePackManagement' wurde erfolgreich importiert."
     } catch {
-        Write-Log "Das Modul 'LanguagePackManagement' wurde erfolgreich installiert."
+        Write-Log "Fehler bei der Installation des Moduls 'LanguagePackManagement': $_"
         throw
     }
 }

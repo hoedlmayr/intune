@@ -32,6 +32,19 @@ Write-Log "-------------------------------------"
 Write-Log "-------------------------------------"
 Write-Log "Spracheinstellungen starten..."
 
+# Install required modules to obtain Autopilot Profiles from Intune
+# see https://learn.microsoft.com/en-us/autopilot/tutorial/existing-devices/install-modules
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Install-Module -Name WindowsAutopilotIntune -MinimumVersion 5.4.0 -Force
+Install-Module -Name Microsoft.Graph.Groups -Force
+Install-Module -Name Microsoft.Graph.Authentication -Force
+Install-Module Microsoft.Graph.Identity.DirectoryManagement -Force
+
+Import-Module -Name WindowsAutopilotIntune -MinimumVersion 5.4
+Import-Module -Name Microsoft.Graph.Groups
+Import-Module -Name Microsoft.Graph.Authentication
+Import-Module -Name Microsoft.Graph.Identity.DirectoryManagement
+
 # Set PSGallery as a trusted repository
 try {
     Write-Log "Setting PSGallery as a trusted repository..."

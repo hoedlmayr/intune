@@ -23,6 +23,9 @@ try {
 		
 		#Sets the provided language as the System Preferred UI Language.
         Set-SystemPreferredUILanguage de-de
+        
+        $LanguageTag="de-de"
+        [System.Environment]::SetEnvironmentVariable("InstalledLanguage", $LanguageTag, "Machine")
 
 
 ###############################

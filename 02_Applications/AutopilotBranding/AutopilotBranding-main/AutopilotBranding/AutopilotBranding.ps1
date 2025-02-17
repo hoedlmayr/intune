@@ -238,15 +238,9 @@ Copy-Item "$installFolder\Start2.bin" -Destination "C:\ITS\Ressources_Intune\Aut
 Copy-Item "$installFolder\TaskbarLayoutModification.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 
 #STEP 17: Configure Lock Screen
-Log "Configuring Lock Screen Image Path (not enforced)"
-# Define file paths
-$LockScreenPath = "C:\ITS\Ressources_Intune\Autopilot_Branding\Lockscreen.jpg"
-# Apply the lock screen image (one-time setting)
-$RegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
-$LockScreenKey = "LockScreenImagePath"
-# Set registry key to apply the image once (does NOT enforce)
-New-Item -Path $RegPath -Force
-Set-ItemProperty -Path $RegPath -Name $LockScreenKey -Value $LockScreenPath -Type String
-
+takeown /f C:\Windows\WEB\*.* /r
+takeown /f C:\Windows\Web\Screen\*.* /r
+Remove-Item C:\Windows\Web\Screen\*.*
+Copy-Item "C:\ITS\Ressources_Intune\Autopilot_Branding\LockScreen\img100.jpg" "C:\Windows\Web\Screen\img100.jpg" -Force
 
 Stop-Transcript

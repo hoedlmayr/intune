@@ -225,17 +225,6 @@ Log "Create temp and ITS folder in C:\"
 New-Item -Path "C:\ITS" -ItemType Directory -Force
 New-Item -Path "C:\Temp" -ItemType Directory -Force
 
-#STEP 17: Configure Lock Screen
-Log "Configuring Lock Screen Image Path (not enforced)"
-# Define file paths
-$LockScreenPath = "$installFolder\Lockscreen.jpg"
-# Apply the lock screen image (one-time setting)
-$RegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
-$LockScreenKey = "LockScreenImagePath"
-# Set registry key to apply the image once (does NOT enforce)
-New-Item -Path $RegPath -Force
-Set-ItemProperty -Path $RegPath -Name $LockScreenKey -Value $LockScreenPath -Type String
-
 #STEP 18: Copy Ressources for ITS
 Log "Copy Ressources for ITS"
 New-Item -Path "C:\ITS\Ressources_Intune\Autopilot_Branding" -ItemType Directory -Force
@@ -247,5 +236,17 @@ Copy-Item "$installFolder\Layout.xml" -Destination "C:\ITS\Ressources_Intune\Aut
 Copy-Item "$installFolder\Lockscreen.jpg" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\Start2.bin" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\TaskbarLayoutModification.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+
+#STEP 17: Configure Lock Screen
+Log "Configuring Lock Screen Image Path (not enforced)"
+# Define file paths
+$LockScreenPath = "C:\ITS\Ressources_Intune\Autopilot_Branding\Lockscreen.jpg"
+# Apply the lock screen image (one-time setting)
+$RegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
+$LockScreenKey = "LockScreenImagePath"
+# Set registry key to apply the image once (does NOT enforce)
+New-Item -Path $RegPath -Force
+Set-ItemProperty -Path $RegPath -Name $LockScreenKey -Value $LockScreenPath -Type String
+
 
 Stop-Transcript

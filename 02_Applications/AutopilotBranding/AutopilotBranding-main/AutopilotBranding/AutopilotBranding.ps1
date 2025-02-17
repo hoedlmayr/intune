@@ -225,4 +225,7 @@ Log "Create temp and ITS folder in C:\"
 New-Item -Path "C:\ITS" -ItemType Directory -Force
 New-Item -Path "C:\Temp" -ItemType Directory -Force
 
+#STEP 17: Configure Lock Screen
+
+
 Stop-Transcript

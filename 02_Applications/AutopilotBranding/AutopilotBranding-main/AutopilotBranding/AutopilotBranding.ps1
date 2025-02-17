@@ -1,4 +1,3 @@
-
 function Log() {
 	[CmdletBinding()]
 	param (
@@ -38,6 +37,7 @@ Log "Loading configuration: $($installFolder)Config.xml"
 [Xml]$config = Get-Content "$($installFolder)Config.xml"
 
 # STEP 1: Apply a custom start menu and taskbar layout
+# Can be copied from %localappdata\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState
 $ci = Get-ComputerInfo
 if ($ci.OsBuildNumber -le 22000) {
 	Log "Importing layout: $($installFolder)Layout.xml"
@@ -226,6 +226,26 @@ New-Item -Path "C:\ITS" -ItemType Directory -Force
 New-Item -Path "C:\Temp" -ItemType Directory -Force
 
 #STEP 17: Configure Lock Screen
+Log "Configuring Lock Screen Image Path (not enforced)"
+# Define file paths
+$LockScreenPath = "$installFolder\Lockscreen.jpg"
+# Apply the lock screen image (one-time setting)
+$RegPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP"
+$LockScreenKey = "LockScreenImagePath"
+# Set registry key to apply the image once (does NOT enforce)
+New-Item -Path $RegPath -Force
+Set-ItemProperty -Path $RegPath -Name $LockScreenKey -Value $LockScreenPath -Type String
 
+#STEP 18: Copy Ressources for ITS
+Log "Copy Ressources for ITS"
+New-Item -Path "C:\ITS\Ressources_Intune\Autopilot_Branding" -ItemType Directory -Force
+Copy-Item "$installFolder\Associations.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\Autopilot.jpg" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\AutopilotBranding.ps1" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\Config.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\Layout.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\Lockscreen.jpg" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\Start2.bin" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\TaskbarLayoutModification.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 
 Stop-Transcript

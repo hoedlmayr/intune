@@ -4,15 +4,11 @@
     <App>DellInc.DellDigitalDelivery</App>
     <App>DellInc.DellOptimizer</App>
     <App>DellInc.DellSupportAssistforPCs</App>
-    <App>Microsoft.BingNews</App>
-    <App>Microsoft.BingWeather</App>
-    <App>Microsoft.BingSearch</App>
     <App>Microsoft.GamingApp</App>
     <App>Microsoft.Getstarted</App>
     <App>Microsoft.GetHelp</App>
     <App>microsoft.windowscommunicationsapps</App>
     <App>Microsoft.Xbox.TCUI</App>
-    <App>Microsoft.XboxGamingOverlay</App>
     <App>Microsoft.XboxIdentityProvider</App>
     <App>Microsoft.XboxSpeechToTextOverlay</App>
     <App>Microsoft.MicrosoftSolitaireCollection</App>

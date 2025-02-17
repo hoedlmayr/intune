@@ -220,4 +220,9 @@ reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Network\NewNetworkWindowOff" 
 Log "Turning off Edge desktop icon"
 reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcutDefault" /t REG_DWORD /d 0 /f /reg:64 | Out-Host
 
+# STEP 16: Create temp and ITS folder in C:\
+Log "Create temp and ITS folder in C:\"
+New-Item -Path "C:\ITS" -ItemType Directory -Force
+New-Item -Path "C:\Temp" -ItemType Directory -Force
+
 Stop-Transcript

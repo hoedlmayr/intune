@@ -233,7 +233,7 @@ Copy-Item "$installFolder\Autopilot.jpg" -Destination "C:\ITS\Ressources_Intune\
 Copy-Item "$installFolder\AutopilotBranding.ps1" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\Config.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\Layout.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
-Copy-Item "$installFolder\Lockscreen.jpg" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
+Copy-Item "$installFolder\img100.jpg" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\Start2.bin" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\TaskbarLayoutModification.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 

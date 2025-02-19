@@ -1,8 +1,18 @@
 <Configuration ID="99be7bb2-5ef2-49d5-8469-310fd96173b0">
+    <Remove All="TRUE">
+        <Product ID="O365ProPlusRetail">  <!-- Or use "Office16ProPlus" for older versions -->
+            <Language ID="en-us" />
+        </Product>
+    </Remove>
   <Info Description="" />
   <Add OfficeClientEdition="64" Channel="MonthlyEnterprise" MigrateArch="TRUE">
     <Product ID="O365BusinessRetail">
       <Language ID="MatchOS" />
+      <Language ID="de-de" />
+      <Language ID="en-gb" />
+      <Language ID="cs-cz" />
+      <Language ID="sl-SI" />
+      <Language ID="ru-RU" />
       <ExcludeApp ID="Groove" />
       <ExcludeApp ID="Lync" />
     </Product>

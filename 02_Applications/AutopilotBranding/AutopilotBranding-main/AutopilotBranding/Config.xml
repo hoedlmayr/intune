@@ -14,6 +14,18 @@
     <App>Microsoft.MicrosoftSolitaireCollection</App>
     <App>Microsoft.SkypeApp</App>
   </RemoveApps>
+  <RemoveWin32Apps>
+    <Win32App>Dell Pair</Win32App>
+    <Win32App>Dell SupportAssist OS Recovery</Win32App>
+    <Win32App>Dell Optimizer</Win32App>
+    <Win32App>Dell Support Assist Remediation</Win32App>
+    <Win32App>Dell Trusted Device Agent</Win32App>
+    <Win32App>Dell Core Services</Win32App>
+    <Win32App>Dell Display Manager</Win32App>
+    <Win32App>Dell Digital Delivery Services</Win32App>
+    <Win32App>Dell Peripheral Manager</Win32App>
+    <Win32App>Dell Support Assist</Win32App>
+  </RemoveWin32Apps>
   <OneDriveSetup>https://go.microsoft.com/fwlink/?linkid=844652</OneDriveSetup>
   <AddFeatures>
     <Feature>Microsoft.Windows.Sense.Client~~~~</Feature>

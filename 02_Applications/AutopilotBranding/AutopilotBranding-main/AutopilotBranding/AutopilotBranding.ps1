@@ -243,4 +243,17 @@ takeown /f C:\Windows\Web\Screen\*.* /r
 Remove-Item C:\Windows\Web\Screen\*.*
 Copy-Item "C:\ITS\Ressources_Intune\Autopilot_Branding\LockScreen\img100.jpg" "C:\Windows\Web\Screen\img100.jpg" -Force
 
+# STEP 18: Remove Win32 Apps, if they exist
+Log "Removing specified in-box Win32 apps"
+$apps = Get-Package -Name *
+$config.Config.RemoveWin32Apps.Win32App | % {
+	$current = $_
+	$apps | ? {$_.Name -eq $current} | % {
+		try {
+			Log "Removing provisioned Win32app: $current"
+			$_ | Uninstall-Package -Force
+		} catch { }
+	}
+}
+
 Stop-Transcript

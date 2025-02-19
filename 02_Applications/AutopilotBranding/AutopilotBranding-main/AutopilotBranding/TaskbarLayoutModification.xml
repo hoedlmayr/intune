@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LayoutModificationTemplate Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
+<LayoutModificationTemplate Version="1"xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
     <DefaultLayoutOverride>
         <StartLayoutCollection>
             <StartLayout GroupCellWidth="6" />

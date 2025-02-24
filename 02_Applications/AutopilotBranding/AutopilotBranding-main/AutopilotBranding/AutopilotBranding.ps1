@@ -220,12 +220,17 @@ reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Network\NewNetworkWindowOff" 
 Log "Turning off Edge desktop icon"
 reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcutDefault" /t REG_DWORD /d 0 /f /reg:64 | Out-Host
 
+
+######################################################################
+############## Hoedi Customizing - not Niehaus #######################
+######################################################################
+
 # STEP 16: Create temp and ITS folder in C:\
 Log "Create temp and ITS folder in C:\"
 New-Item -Path "C:\ITS" -ItemType Directory -Force
 New-Item -Path "C:\Temp" -ItemType Directory -Force
 
-#STEP 18: Copy Ressources for ITS
+#STEP 17: Copy Ressources for ITS
 Log "Copy Ressources for ITS"
 New-Item -Path "C:\ITS\Ressources_Intune\Autopilot_Branding" -ItemType Directory -Force
 Copy-Item "$installFolder\Associations.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
@@ -233,27 +238,73 @@ Copy-Item "$installFolder\Autopilot.jpg" -Destination "C:\ITS\Ressources_Intune\
 Copy-Item "$installFolder\AutopilotBranding.ps1" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\Config.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\Layout.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
-Copy-Item "$installFolder\img100.jpg" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\Start2.bin" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 Copy-Item "$installFolder\TaskbarLayoutModification.xml" -Destination "C:\ITS\Ressources_Intune\Autopilot_Branding" -Force
 
-#STEP 17: Configure Lock Screen
-takeown /f C:\Windows\WEB\*.* /r
-takeown /f C:\Windows\Web\Screen\*.* /r
-Remove-Item C:\Windows\Web\Screen\*.*
-Copy-Item "C:\ITS\Ressources_Intune\Autopilot_Branding\LockScreen\img100.jpg" "C:\Windows\Web\Screen\img100.jpg" -Force
-
 # STEP 18: Remove Win32 Apps, if they exist
-Log "Removing specified in-box Win32 apps"
-$apps = Get-Package -Name *
-$config.Config.RemoveWin32Apps.Win32App | % {
-	$current = $_
-	$apps | ? {$_.Name -eq $current} | % {
-		try {
-			Log "Removing provisioned Win32app: $current"
-			$_ | Uninstall-Package -Force
-		} catch { }
-	}
+
+# STEP 18A: Remove Dell Support Assistant:
+$DellApps = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -match "Dell SupportAssist" }  
+foreach ($App in $DellApps) {
+    Write-Host "Uninstalling: $($App.DisplayName)"
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/x $($App.PSChildName) /qn" -Wait
 }
 
-Stop-Transcript
+# STEP 18B: Remove Dell Core Services:
+$DellApps = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -match "Dell Core Services" }  
+foreach ($App in $DellApps) {
+    Write-Host "Uninstalling: $($App.DisplayName)"
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/x $($App.PSChildName) /qn" -Wait
+}
+
+# STEP 18C: Remove Dell Optimizer:
+$DellApps = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -match "Dell Optimizer" }  
+foreach ($App in $DellApps) {
+    Write-Host "Uninstalling: $($App.DisplayName)"
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/x $($App.PSChildName) /qn" -Wait
+}
+
+# STEP 18D: Remove Dell Optimizer Core:
+$DellApps = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -match "Dell Optimizer Core" }
+foreach ($App in $DellApps) {
+   $UninstallString = $App.UninstallString
+   if ($UninstallString) {
+       # Bereinigen Sie den UninstallString, um nur den Pfad zur ausführbaren Datei zu erhalten
+       $UninstallPath = $UninstallString -replace '\"', '' -replace ' -.*', ''
+       $UninstallCommand = "`"$UninstallPath`" -remove -runfromtemp -silent"
+       Start-Process -FilePath "cmd.exe" -ArgumentList "/c $UninstallCommand" -NoNewWindow -Wait
+   }
+}
+
+# STEP 18E: Remove Dell SupportAssist OS Recovery Plugin for Dell Update:
+$DellApps = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -match "Dell SupportAssist OS Recovery Plugin for Dell Update" }
+foreach ($App in $DellApps) {
+   $UninstallString = $App.UninstallString
+   if ($UninstallString) {
+       # Bereinigen Sie den UninstallString, um nur den Pfad zur ausführbaren Datei zu erhalten
+       $UninstallPath = $UninstallString -replace '\"', '' -replace ' /.*', ''
+       $UninstallCommand = "`"$UninstallPath`" /uninstall /quiet"
+       Start-Process -FilePath "cmd.exe" -ArgumentList "/c $UninstallCommand" -NoNewWindow -Wait
+   }
+}
+
+# STEP 18F: Remove Dell SupportAssist Remediation:
+$DellApps = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -match "Dell SupportAssist Remediation" }
+foreach ($App in $DellApps) {
+   $UninstallString = $App.UninstallString
+   if ($UninstallString) {
+       # Bereinigen Sie den UninstallString, um nur den Pfad zur ausführbaren Datei zu erhalten
+       $UninstallPath = $UninstallString -replace '\"', '' -replace ' /.*', ''
+       $UninstallCommand = "`"$UninstallPath`" /uninstall /quiet"
+       Start-Process -FilePath "cmd.exe" -ArgumentList "/c $UninstallCommand" -NoNewWindow -Wait
+   }
+}
+
+# STEP 18G: Remove Dell Trusted Device Agent:
+$DellApps = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -match "Dell Trusted Device Agent" }  
+foreach ($App in $DellApps) {
+    Write-Host "Uninstalling: $($App.DisplayName)"
+    Start-Process -FilePath "msiexec.exe" -ArgumentList "/x $($App.PSChildName) /qn /norestart" -Wait
+}
+
+Stop-TStop-Transcript

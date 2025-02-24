@@ -307,4 +307,4 @@ foreach ($App in $DellApps) {
     Start-Process -FilePath "msiexec.exe" -ArgumentList "/x $($App.PSChildName) /qn /norestart" -Wait
 }
 
-Stop-TStop-Transcript
+Stop-Transcript
